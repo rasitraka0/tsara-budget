@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tsara Budget</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button class="menu-toggle" id="menu-toggle">☰</button>
+    <div class="overlay" id="overlay"></div>
+
+    <div class="container">
+      <aside class="sidebar" id="sidebar">
+        <div class="balance-card">
+          <div class="balance-label">Mon Budget</div>
+        </div>
+
+        <nav class="menu-nav">
+          <button class="menu-item active" id="btn-new-budget">
+            <span class="menu-icon">📝</span>
+            <span>Nouveau Budget</span>
+          </button>
+          <button class="menu-item" id="btn-progress">
+            <span class="menu-icon">⏳</span>
+            <span>En cours</span>
+          </button>
+          <button class="menu-item" id="btn-historique">
+            <span class="menu-icon">📜</span>
+            <span>Historique</span>
+          </button>
+          <button class="menu-item" id="btn-futur">
+            <span class="menu-icon">📅</span>
+            <span>Budgets Planifiés</span>
+          </button>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <section class="section active" id="section-new-budget">
+          <div class="header">
+            <h1>Nouveau Budget</h1>
+            <p class="header-subtitle">
+              Créez votre budget pour une nouvelle journée
+            </p>
+          </div>
+
+          <div class="form-card">
+            <form id="form-new-budget">
+              <div class="form-group">
+                <label class="form-label" for="date-reference"
+                  >Date de référence</label
+                >
+                <input
+                  type="date"
+                  class="form-input"
+                  id="date-reference"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="budget-total"
+                  >Budget total de la journée (Ariary)</label
+                >
+                <input
+                  type="number"
+                  class="form-input"
+                  id="budget-total"
+                  placeholder="Ex: 50000"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn-primary" id="create-budget">
+                Créer le budget
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <section class="section" id="section-progress">
+          <div class="header">
+            <h1>Progrès du jour</h1>
+            <p class="header-subtitle" id="date-ref">date</p>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">Total Budget</div>
+              <div class="stat-value" id="total-budget">0 Ar</div>
+            </div>
+            <div class="stat-card coral">
+              <div class="stat-label">Total de dépenses</div>
+              <div class="stat-value" id="total-expenses">0 Ar</div>
+            </div>
+            <div class="stat-card blue">
+              <div class="stat-label">Reste disponible</div>
+              <div class="stat-value" id="remaining-budget">0 Ar</div>
+            </div>
+          </div>
+
+          <div class="two-column-grid" style="margin-top: 32px">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Ajouter une dépense</h3>
+              </div>
+              <form id="form-add-expense">
+                <div class="form-group">
+                  <label class="form-label" for="category">Catégorie</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    id="category"
+                    placeholder="Ex: Transport, Nourriture"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="montant"
+                    >Montant (Ariary)</label
+                  >
+                  <input
+                    type="number"
+                    class="form-input"
+                    id="montant"
+                    placeholder="Ex: 5000"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn-primary" id="btn-add-expense">
+                  Ajouter la dépense
+                </button>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Liste des dépenses</h3>
+              </div>
+              <div id="expense-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="section-historique">
+          <div class="header">
+            <h1>Historique</h1>
+            <p class="header-subtitle">Consultez vos budgets passés</p>
+          </div>
+          <div class="all-history-item">
+            <div class="history-item">
+              <div class="history-info">
+                <h3>2025-12-07</h3>
+                <p>Budget Total : 50 000 Ar</p>
+              </div>
+
+              <button class="btn-detail" data-date="">Détail</button>
+              <button class="btn-sup" data-date="">Supprimer</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="section-budget-futurs">
+          <div class="header">
+            <h1>Votre Budgets Planifiés</h1>
+            <p class="header-subtitle">
+              Consultez et modifiez vos budgets planifiés
+            </p>
+          </div>
+          <div class="all-futur-item"></div>
+        </section>
+
+        <section class="section" id="section-edit-budget">
+          <div class="header edit-header">
+            <div>
+              <h1>Modifier le budget</h1>
+              <p class="header-subtitle">
+                Budget du <span id="edit-budget-date-label">Mars 2025</span>
+              </p>
+            </div>
+            <div>
+              <button class="btn-primary" id="btn-edit-back">Retour</button>
+            </div>
+          </div>
+
+          <div class="form-card edit">
+            <div class="form-group">
+              <label class="edit-budget-from-label" for="date-reference"
+                >Nouveau date de référence</label
+              >
+              <input
+                type="date"
+                class="form-input"
+                id="edit-budget-date"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="edit-budget-from-label" for="edit-budget-total"
+                >Nouveau budget total de la journée</label
+              >
+              <input
+                type="number"
+                class="form-input"
+                id="edit-budget-total"
+                placeholder="Ex: 50000"
+                required
+              />
+            </div>
+            <div>
+              <button type="submit" class="btn-edit-budget" id="edit-budget">
+                Appliquer
+              </button>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">Total Budget</div>
+              <div class="stat-value" id="summary-total-budget">0 Ar</div>
+            </div>
+            <div class="stat-card coral">
+              <div class="stat-label">Total de dépenses</div>
+              <div class="stat-value" id="summary-total-expenses">0 Ar</div>
+            </div>
+            <div class="stat-card blue">
+              <div class="stat-label">Reste disponible</div>
+              <div class="stat-value" id="summary-remaining-budget">0 Ar</div>
+            </div>
+          </div>
+
+          <div class="expenses-section">
+            <div class="two-column-grid" style="margin-top: 32px">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Ajouter une dépense</h3>
+                </div>
+                <form id="form-add-expense">
+                  <div class="form-group">
+                    <label class="form-label" for="category">Catégorie</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      id="category-edit"
+                      placeholder="Ex: Transport, Nourriture"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="montant"
+                      >Montant (Ariary)</label
+                    >
+                    <input
+                      type="number"
+                      class="form-input"
+                      id="montant-edit"
+                      placeholder="Ex: 5000"
+                      required
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn-primary"
+                    id="btn-add-expense-edit"
+                  >
+                    Ajouter la dépense
+                  </button>
+                </form>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Liste des dépenses</h3>
+                </div>
+                <div id="expense-list-from-edit"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal" id="detail-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Détails du budget</h2>
+          <button class="btn-close detail" id="close-modal">X</button>
+        </div>
+        <div id="modal-body">
+          <div class="modal-budget-info">
+            <div class="modal-info-item">
+              <span class="modal-label">Date</span>
+              <span class="modal-value">05 Décembre 2025</span>
+            </div>
+
+            <div class="modal-info-item">
+              <span class="modal-label">Budget total</span>
+              <span class="modal-value">50 000 Ar</span>
+            </div>
+
+            <div class="modal-info-item">
+              <span class="modal-label">Total dépensé</span>
+              <span class="modal-value negative">28 000 Ar</span>
+            </div>
+          </div>
+
+          <!--  -->
+          <div class="modal-expenses">
+            <h3>Liste des dépenses</h3>
+
+            <div class="modal-expense-item">
+              <div class="modal-expense-category">Transport</div>
+              <div class="modal-expense-amount">5 000 Ar</div>
+            </div>
+
+            <div class="modal-expense-item">
+              <div class="modal-expense-category">Nourriture</div>
+              <div class="modal-expense-amount">15 000 Ar</div>
+            </div>
+
+            <div class="modal-expense-item">
+              <div class="modal-expense-category">Shopping</div>
+              <div class="modal-expense-amount">8 000 Ar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
