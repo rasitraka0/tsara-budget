@@ -19,14 +19,14 @@ export function initBtnProgress() {
 
 export function initBtnHistorique() {
   document.querySelector('#btn-historique').addEventListener('click', () => {
-    alert('history clicked');
+   
 
     filtrerHistory();
   });
 }
 export function initBtnFutur() {
   document.querySelector('#btn-futur').addEventListener('click', () => {
-    alert('futur budget clicked');
+    
     fitlrerFuturBudget();
   });
 }

@@ -3,17 +3,17 @@ import { formatDate, formatMontant } from '../utils/formatters.js';
 
 export function displayTotalBudget(amount) {
   document.querySelector('#total-budget').textContent = `${formatMontant(
-    amount
+    amount,
   )}`;
 }
 export function displayTotalExpense(amount) {
   document.querySelector('#total-expenses').textContent = `${formatMontant(
-    amount
+    amount,
   )}`;
 }
 export function displayRemainingBudget(amount) {
   document.querySelector('#remaining-budget').textContent = `${formatMontant(
-    amount
+    amount,
   )}`;
 }
 

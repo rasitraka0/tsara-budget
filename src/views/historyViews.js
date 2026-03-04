@@ -44,7 +44,6 @@ export function btnDeleteHistory() {
   listHistory.addEventListener('click', (e) => {
     if (e.target.classList.contains('btn-sup')) {
       const id = Number(e.target.dataset.id);
-      alert('button sup');
 
       deleteHistory(id);
     }

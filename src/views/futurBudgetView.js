@@ -37,7 +37,7 @@ export function btnModification() {
   listFutur.addEventListener('click', (e) => {
     if (e.target.classList.contains('btn-change-futur')) {
       const id = Number(e.target.dataset.id);
-      alert(`${id} no id anio budget io `);
+
       startEditFuturBudget(id);
     }
   });
@@ -49,7 +49,7 @@ export function btnDeleteFutur() {
   listFutur.addEventListener('click', (e) => {
     if (e.target.classList.contains('btn-delete-futur')) {
       const id = Number(e.target.dataset.id);
-      alert('button supprimer futur clicked');
+
       deleteFutur(id);
     }
   });

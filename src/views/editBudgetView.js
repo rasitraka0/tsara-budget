@@ -8,26 +8,23 @@ import { formatDate, formatMontant } from '../utils/formatters.js';
 
 export function displayDateTitleEdit(budget) {
   document.querySelector('#edit-budget-date-label').textContent = `${formatDate(
-    budget.date
+    budget.date,
   )}`;
 }
 
 export function displayTotalBudgetEdit(budget) {
-  document.querySelector(
-    '#summary-total-budget'
-  ).textContent = `${formatMontant(budget.budgetAmount)} `;
+  document.querySelector('#summary-total-budget').textContent =
+    `${formatMontant(budget.budgetAmount)} `;
 }
 
 export function displayTotalExpensesEdit(budget) {
-  document.querySelector(
-    '#summary-total-expenses'
-  ).textContent = `${formatMontant(budget.getTotalExpense())}`;
+  document.querySelector('#summary-total-expenses').textContent =
+    `${formatMontant(budget.getTotalExpense())}`;
 }
 
 export function displayRemainingEdit(budget) {
-  document.querySelector(
-    '#summary-remaining-budget'
-  ).textContent = `${formatMontant(budget.getRemainingBudget())}`;
+  document.querySelector('#summary-remaining-budget').textContent =
+    `${formatMontant(budget.getRemainingBudget())}`;
 }
 
 export function displayDateBudgetEdit(budget) {
@@ -54,7 +51,6 @@ export function initBtnAddExpenseEdit() {
     .querySelector('#btn-add-expense-edit')
     .addEventListener('click', (e) => {
       e.preventDefault();
-      alert('button ajouter un depenses futur clicquer');
 
       const category = document.querySelector('#category-edit');
       const montant = document.querySelector('#montant-edit');
