@@ -1,0 +1,37 @@
+tsara-budget/
+│
+├── index.html
+├── style.css
+│
+└── src/
+    │
+    ├── main.js                           # 🚪 Point d'entrée
+    │
+    ├── models/                           # 📦 Logique métier
+    │   ├── Budget.js                     # Classe Budget (vos dépenses)
+    │   └── AllBudget.js                  # Gestionnaire de tous les budgets
+    │
+    ├── views/                            # 🎨 Interface utilisateur + événements
+    │   ├── NavigationView.js             # Menu + changement de sections
+    │   ├── BudgetFormView.js             # Formulaire "Nouveau Budget"
+    │   ├── ProgressView.js               # Section "En cours" (stats + dépenses)
+    │   ├── HistoryView.js                # Section "Historique"
+    │   ├── FuturBudgetsView.js           # Section "Budgets Planifiés"
+    │   ├── EditBudgetView.js             # Section "Modifier le budget"
+    │   └── ModalView.js                  # Modal de détails
+    │
+    ├── controllers/                      # 🎮 Coordination (logique applicative)
+    │   ├── NavigationController.js       # Gestion de la navigation
+    │   ├── BudgetController.js           # Création de nouveaux budgets
+    │   ├── ExpenseController.js          # Ajout/suppression de dépenses
+    │   ├── HistoryController.js          # Affichage historique + détails
+    │   ├── FuturBudgetsController.js     # Gestion budgets planifiés
+    │   └── EditBudgetController.js       # Modification de budgets
+    │
+    ├── services/                         # 💾 Persistance des données
+    │   └── StorageService.js             # Gestion localStorage + AllBudget
+    │
+    └── utils/                            # 🛠️ Fonctions utilitaires
+        ├── formatters.js                 # Formatage montants et dates
+        ├── validators.js                 # Validations
+        └── helpers.js                    # Générateur d'ID, etc.
